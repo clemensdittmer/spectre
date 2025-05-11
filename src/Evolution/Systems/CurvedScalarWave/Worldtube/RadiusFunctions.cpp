@@ -35,8 +35,8 @@ double smooth_broken_power_law(const double orbit_radius, const double alpha,
   detail::check_alpha(alpha);
   detail::check_delta(delta);
   const double r_by_rb = orbit_radius / rb;
-  return radius_at_inf * pow(r_by_rb, alpha) *
-         pow(1. + pow(r_by_rb, 1. / delta), -alpha * delta);
+  return radius_at_inf * pow(r_by_rb, alpha);
+  //Adjusted to preserve the old way of doing the power law
 }
 
 double smooth_broken_power_law_derivative(const double orbit_radius,
@@ -55,8 +55,8 @@ double smooth_broken_power_law_derivative(const double orbit_radius,
   const double temp1 = pow(r_by_rb, 1. / delta - 1.);
   const double temp2 = temp1 * r_by_rb + 1.;
 
-  return radius_at_inf * alpha * pow(r_by_rb, alpha - 1) / rb *
-         pow(temp2, -alpha * delta - 1.) * (temp2 - temp1 * r_by_rb);
+  return radius_at_inf * alpha * pow(r_by_rb, alpha - 1) / rb;
+  //Adjusted to preserve the old way of doing the power law
 }
 
 }  // namespace CurvedScalarWave::Worldtube
