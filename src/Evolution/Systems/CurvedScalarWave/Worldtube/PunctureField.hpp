@@ -52,7 +52,7 @@ void puncture_field(
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
     const tnsr::I<double, 3>& particle_acceleration, double bh_mass,
-    size_t order);
+    const std::array<double, 3>& spin, size_t order);
 
 /*!
  * \brief Computes the puncture/singular field \f$\Psi^\mathcal{P}\f$ of a
@@ -72,7 +72,8 @@ void puncture_field_0(
     const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
-    const tnsr::I<double, 3>& particle_acceleration, double bh_mass);
+    const tnsr::I<double, 3>& particle_acceleration, double bh_mass,
+    const std::array<double, 3>& spin);
 
 /*!
  * \brief Computes the puncture/singular field \f$\Psi^\mathcal{P}\f$ of a

@@ -160,7 +160,7 @@ void PunctureFieldCompute<Dim>::function(
     const std::array<tnsr::I<double, Dim, ::Frame::Inertial>, 2>&
         particle_position_velocity,
     const tnsr::I<double, Dim>& particle_acceleration, const double charge,
-    const size_t expansion_order) {
+    const std::array<double, 3>& spin, const size_t expansion_order) {
   if (inertial_face_coords_centered.has_value()) {
     if (not result->has_value()) {
       result->emplace(get<0>(inertial_face_coords_centered.value()).size());
@@ -168,7 +168,7 @@ void PunctureFieldCompute<Dim>::function(
     puncture_field(make_not_null(&(result->value())),
                    inertial_face_coords_centered.value(),
                    particle_position_velocity[0], particle_position_velocity[1],
-                   particle_acceleration, 1., expansion_order);
+                   particle_acceleration, 1., spin, expansion_order);
     result->value() *= charge;
   } else {
     result->reset();
