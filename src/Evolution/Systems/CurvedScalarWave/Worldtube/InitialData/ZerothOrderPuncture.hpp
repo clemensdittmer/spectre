@@ -57,8 +57,14 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
     static constexpr double upper_bound() { return 1.; }
   };
 
+  struct Spin {
+    using type = std::array<double, 3>;
+    static constexpr Options::String help = {
+        "The value of the black hole dimensionless spin."};
+  };
+
   using options =
-      tmpl::list<ParticlePosition, ParticleVelocity, ParticleCharge>;
+      tmpl::list<ParticlePosition, ParticleVelocity, ParticleCharge, Spin>;
 
   static constexpr Options::String help = {
       "Initial data for a scalar charge in Kerr-Schild coordinates. It "
@@ -70,6 +76,7 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
   ZerothOrderPuncture(std::array<double, 3> particle_position,
                       std::array<double, 3> particle_velocity,
                       double particle_charge,
+                      const std::array<double, 3> bh_spin,
                       const Options::Context& context = {});
   ZerothOrderPuncture(const ZerothOrderPuncture&) = default;
   ZerothOrderPuncture& operator=(const ZerothOrderPuncture&) = default;
@@ -102,7 +109,6 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
  private:
   // assume a non-spinning black hole of mass 1M centered on the coordinate
   // origin
-  gr::Solutions::KerrSchild kerr_schild_{1., {{0., 0., 0.}}, {{0., 0., 0.}}};
   tnsr::I<double, 3> particle_position_{
       std::numeric_limits<double>::signaling_NaN()};
   tnsr::I<double, 3> particle_velocity_{
@@ -110,6 +116,9 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
   tnsr::I<double, 3> geodesic_acceleration_{
       std::numeric_limits<double>::signaling_NaN()};
   double particle_charge_{std::numeric_limits<double>::signaling_NaN()};
+  std::array<double, 3> bh_spin_{
+      std::numeric_limits<double>::signaling_NaN()};
+  gr::Solutions::KerrSchild kerr_schild_{};
 
   friend bool operator==(const ZerothOrderPuncture& lhs,
                          const ZerothOrderPuncture& rhs);
