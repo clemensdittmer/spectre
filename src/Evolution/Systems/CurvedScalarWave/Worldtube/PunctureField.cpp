@@ -71,9 +71,19 @@ void PunctureField::apply_puncture(
     const tnsr::I<double, 3>& particle_velocity,
     const tnsr::I<double, 3>& particle_acceleration) const {
   if (type_ == Type::Kerr) {
-    ERROR("Kerr puncture not implemented yet");
-  }
-  if (expansion_order_ == 0) {
+    if (expansion_order_ == 0){
+      puncture_field_kerr_0(result, centered_coords, particle_position,
+                         particle_velocity, particle_acceleration,
+                         black_hole_mass_, spin_along_z_axis_);
+    };
+    else {
+      ERROR("The puncture field is only implemented up to expansion order 0 but "
+        "you requested order "
+            << expansion_order_);
+    };
+  };
+  else if (type_ == Type::Schwarzschild) {
+    if (expansion_order_ == 0) {
     puncture_field_0(result, centered_coords, particle_position,
                      particle_velocity, particle_acceleration,
                      black_hole_mass_);
@@ -86,7 +96,8 @@ void PunctureField::apply_puncture(
         "The puncture field is only implemented up to expansion order 1 but "
         "you requested order "
         << expansion_order_);
-  }
+    };
+  };
 }
 
 void PunctureField::apply_acceleration_terms(
