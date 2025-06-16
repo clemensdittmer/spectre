@@ -28,7 +28,7 @@ void puncture_field_acc_0(
     const tnsr::I<double, 3> &particle_velocity,
     const tnsr::I<double, 3> &particle_acceleration,
     const double BH_mass,
-    const double BH_spin) {
+    const std::array<double,3> &BH_spin) {
   const size_t grid_size = get<0>(centered_coords).size();
   result->initialize(grid_size);
   const double xp = particle_position[0];
@@ -48,7 +48,7 @@ void puncture_field_acc_0(
   const auto &Dz = get<2>(centered_coords);
 
   const double M = BH_mass;
-  const double a = BH_spin;
+  const double a = BH_spin[2]; //Assuming spin is in z-direction only
 
   DynamicBuffer<DataVector> temps(57, grid_size);
 
