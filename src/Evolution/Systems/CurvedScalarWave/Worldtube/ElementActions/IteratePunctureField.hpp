@@ -55,6 +55,7 @@ struct IteratePunctureField {
         [&self_force_data = get(inbox.at(time_step_id)),
          &position_velocity = db::get<Tags::ParticlePositionVelocity<Dim>>(box),
          &centered_face_coordinates, charge = db::get<Tags::Charge>(box),
+         spin = db::get<Tags::Spin>(box),
          order = db::get<Tags::ExpansionOrder>(box)](
             const auto iterated_puncture_field) {
           tnsr::I<double, Dim> iterated_acceleration{
@@ -69,7 +70,7 @@ struct IteratePunctureField {
           puncture_field(make_not_null(&iterated_puncture_field->value()),
                          centered_face_coordinates.value(),
                          position_velocity[0], position_velocity[1],
-                         iterated_acceleration, 1., order);
+                         iterated_acceleration, 1., spin, order);
           Variables<tmpl::list<CurvedScalarWave::Tags::Psi,
                                ::Tags::dt<CurvedScalarWave::Tags::Psi>,
                                ::Tags::deriv<CurvedScalarWave::Tags::Psi,

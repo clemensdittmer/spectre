@@ -16,12 +16,13 @@ InitialData:
     ParticlePosition: [&XCoordWorldtube 10., 0., 0.]
     ParticleVelocity: [0., 0.01, 0.]
     ParticleCharge: &Charge 0.5
+    Spin: &Spin [0., 0., 0.]
 
 BackgroundSpacetime:
   KerrSchild:
     Mass: 1.
     Center: [0., 0., 0.]
-    Spin: [0., 0., 0.]
+    Spin: *Spin
     Velocity: [0., 0., 0.]
 
 ResourceInfo:
@@ -142,6 +143,7 @@ Worldtube:
   ExcisionSphere: ExcisionSphereA
   ExpansionOrder: 1
   Charge: *Charge
+  Spin: *Spin
   SelfForceOptions: None
   WorldtubeRadiusOptions:
     Amplitude: 2.

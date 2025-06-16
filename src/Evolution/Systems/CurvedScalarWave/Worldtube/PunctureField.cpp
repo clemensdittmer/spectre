@@ -25,10 +25,10 @@ void puncture_field(
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
     const tnsr::I<double, 3>& particle_acceleration, const double bh_mass,
-    const size_t order) {
+    const std::array<double, 3>& spin, const size_t order) {
   if (order == 0) {
     puncture_field_0(result, centered_coords, particle_position,
-                     particle_velocity, particle_acceleration, bh_mass);
+                     particle_velocity, particle_acceleration, bh_mass, spin);
   } else if (order == 1) {
     puncture_field_1(result, centered_coords, particle_position,
                      particle_velocity, particle_acceleration, bh_mass);
