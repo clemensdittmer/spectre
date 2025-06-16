@@ -83,6 +83,26 @@ void puncture_field_0(
  * \details For non-geodesic orbits, there are additional contributions, see
  * `acceleration_terms_0`.
  */
+void puncture_field_kerr_0(
+    gsl::not_null<Variables<tmpl::list<
+        CurvedScalarWave::Tags::Psi, ::Tags::dt<CurvedScalarWave::Tags::Psi>,
+        ::Tags::deriv<CurvedScalarWave::Tags::Psi, tmpl::size_t<3>,
+                      Frame::Inertial>>>*>
+        result,
+    const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
+    const tnsr::I<double, 3>& particle_position,
+    const tnsr::I<double, 3>& particle_velocity,
+    const tnsr::I<double, 3>& particle_acceleration, double bh_mass,
+    const std::array<double, 3>& spin);
+
+/*!
+ * \brief Computes the puncture/singular field \f$\Psi^\mathcal{P}\f$ of a
+ * scalar charge on a generic orbit in Kerr Spacetime.
+ *
+ * \details For higher order expansions, or non-geodesic orbits, there
+ * are other puncture terms that have yet to be computed.
+ * Do not run executable for order higher than 0.
+ */
 void puncture_field_1(
     gsl::not_null<Variables<tmpl::list<
         CurvedScalarWave::Tags::Psi, ::Tags::dt<CurvedScalarWave::Tags::Psi>,
