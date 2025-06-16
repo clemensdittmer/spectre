@@ -79,17 +79,15 @@ class PunctureField {
   struct Kerr {
     using type = Kerr;
     static constexpr Options::String help = {
-        "Use the Kerr puncture field model. This option is currently parsed "
-        "but not yet implemented at runtime."};
+        "Use the Kerr puncture field model."};
 
     /*!
-     * \brief Puncture field expansion order. Currently orders 0 and 1 are
-     * implemented.
+     * \brief Puncture field expansion order. Currently orders 0 is implemented.
      */
     struct ExpansionOrder {
       using type = size_t;
       static constexpr Options::String help{
-          "Puncture field expansion order. Currently orders 0 and 1 are "
+          "Puncture field expansion order. Currently order 0 is"
           "implemented."};
       static size_t upper_bound() { return 1; }
     };
@@ -111,6 +109,7 @@ class PunctureField {
       using type = double;
       static constexpr Options::String help{
           "The dimensionless z-component of the black-hole spin."};
+      static double lower_bound() { return 0.; }
     };
 
     using options = tmpl::list<ExpansionOrder, BlackHoleMass, SpinAlongZAxis>;
@@ -220,7 +219,8 @@ void puncture_field_0(
     const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
-    const tnsr::I<double, 3>& particle_acceleration, double bh_mass);
+    const tnsr::I<double, 3>& particle_acceleration, double bh_mass,
+    const std::array<double, 3>& spin);
 
 /*!
  * \brief Computes the puncture/singular field \f$\Psi^\mathcal{P}\f$ of a
