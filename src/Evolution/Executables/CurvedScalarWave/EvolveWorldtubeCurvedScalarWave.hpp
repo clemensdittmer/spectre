@@ -278,6 +278,7 @@ struct EvolutionMetavars {
       CurvedScalarWave::Worldtube::Tags::WorldtubeRadiusParameters,
       CurvedScalarWave::Worldtube::Tags::BlackHoleRadiusParameters,
       CurvedScalarWave::Worldtube::Tags::Charge,
+      CurvedScalarWave::Worldtube::Tags::Spin,
       CurvedScalarWave::Worldtube::Tags::SelfForceTurnOnTime,
       CurvedScalarWave::Worldtube::Tags::SelfForceTurnOnInterval,
       CurvedScalarWave::Worldtube::Tags::Mass,

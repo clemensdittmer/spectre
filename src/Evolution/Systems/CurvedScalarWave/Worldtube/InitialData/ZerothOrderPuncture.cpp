@@ -28,7 +28,7 @@ ZerothOrderPuncture::ZerothOrderPuncture(
       particle_velocity_(particle_velocity),
       particle_charge_(particle_charge),
       bh_spin_(bh_spin),
-      kerr_schild_({1., bh_dimensionless_spin, {{0., 0., 0.}}}) {
+      kerr_schild_({1., bh_spin, {{0., 0., 0.}}}) {
   const auto background_vars = kerr_schild_.variables(
       particle_position_, 0.,
       tmpl::list<gr::Tags::SpacetimeChristoffelSecondKind<double, 3,
