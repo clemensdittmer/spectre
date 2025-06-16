@@ -717,7 +717,7 @@ struct PunctureFieldCompute : PunctureField<Dim>, db::ComputeTag {
   using argument_tags =
       tmpl::list<FaceCoordinates<Dim, Frame::Inertial, true>,
                  ParticlePositionVelocity<Dim>, GeodesicAcceleration<Dim>,
-                 Charge, ExpansionOrder>;
+                 Charge, Spin, ExpansionOrder>;
   using return_type = std::optional<Variables<tmpl::list<
       CurvedScalarWave::Tags::Psi, ::Tags::dt<CurvedScalarWave::Tags::Psi>,
       ::Tags::deriv<CurvedScalarWave::Tags::Psi, tmpl::size_t<3>,
@@ -729,7 +729,7 @@ struct PunctureFieldCompute : PunctureField<Dim>, db::ComputeTag {
       const std::array<tnsr::I<double, Dim, ::Frame::Inertial>, 2>&
           particle_position_velocity,
       const tnsr::I<double, Dim>& particle_acceleration, double charge,
-      const size_t expansion_order);
+      const std::array<double, 3>& spin, const size_t expansion_order);
 };
 /// @}
 
