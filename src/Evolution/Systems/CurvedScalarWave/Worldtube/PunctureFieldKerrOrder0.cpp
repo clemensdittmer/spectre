@@ -17,7 +17,7 @@
 
 namespace CurvedScalarWave::Worldtube {
 
-void puncture_field_acc_0(
+void puncture_field_kerr_0(
     gsl::not_null<Variables<tmpl::list<
         CurvedScalarWave::Tags::Psi, ::Tags::dt<CurvedScalarWave::Tags::Psi>,
         ::Tags::deriv<CurvedScalarWave::Tags::Psi, tmpl::size_t<3>,
