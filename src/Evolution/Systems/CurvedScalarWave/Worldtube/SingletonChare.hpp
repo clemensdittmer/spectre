@@ -90,8 +90,8 @@ struct WorldtubeSingleton {
         tmpl::list<Tags::EvolvedPosition<Dim>, Tags::EvolvedVelocity<Dim>>>;
   };
   using step_actions =
-      tmpl::list<Actions::UpdateFunctionsOfTime, Actions::ChangeSlabSize,
-                 Actions::ReceiveElementData,
+      tmpl::list<Actions::UpdateQuaternionFunctionsOfTime,
+                 Actions::ChangeSlabSize, Actions::ReceiveElementData,
                  ::Actions::MutateApply<IterateAccelerationTerms>,
                  Actions::SendAccelerationTerms<Metavariables>,
                  ::Actions::MutateApply<UpdateAcceleration>,
