@@ -73,6 +73,7 @@
 #include "ParallelAlgorithms/Actions/TerminatePhase.hpp"
 #include "ParallelAlgorithms/Events/Factory.hpp"
 #include "ParallelAlgorithms/Events/ObserveNorms.hpp"
+#include "ParallelAlgorithms/Events/ObserveTimeStepVolume.hpp"
 #include "ParallelAlgorithms/EventsAndDenseTriggers/DenseTrigger.hpp"
 #include "ParallelAlgorithms/EventsAndDenseTriggers/DenseTriggers/Factory.hpp"
 #include "ParallelAlgorithms/EventsAndTriggers/Completion.hpp"
@@ -215,14 +216,14 @@ struct EvolutionMetavars {
         tmpl::pair<DenseTrigger, DenseTriggers::standard_dense_triggers>,
         tmpl::pair<DomainCreator<volume_dim>,
                    tmpl::list<domain::creators::BinaryCompactObject<true>>>,
-        tmpl::pair<
-            Event,
-            tmpl::flatten<tmpl::list<
-                Events::time_events<system>, Events::Completion,
-                intrp::Events::InterpolateWithoutInterpComponent<
-                    volume_dim, Spheres, interpolator_source_vars>,
-                dg::Events::field_observations<volume_dim, observe_fields,
-                                               non_tensor_compute_tags>>>>,
+        tmpl::pair<Event,
+                   tmpl::flatten<tmpl::list<
+                       Events::time_events<system>, Events::Completion,
+                       intrp::Events::InterpolateWithoutInterpComponent<
+                           volume_dim, Spheres, interpolator_source_vars>,
+                       dg::Events::field_observations<
+                           volume_dim, observe_fields, non_tensor_compute_tags>,
+                       dg::Events::ObserveTimeStepVolume<system>>>>,
         tmpl::pair<MathFunction<1, Frame::Inertial>,
                    MathFunctions::all_math_functions<1, Frame::Inertial>>,
         tmpl::pair<PhaseChange,
