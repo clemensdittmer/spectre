@@ -223,7 +223,7 @@ struct EvolutionMetavars {
                            volume_dim, Spheres, interpolator_source_vars>,
                        dg::Events::field_observations<
                            volume_dim, observe_fields, non_tensor_compute_tags>,
-                       dg::Events::ObserveTimeStepVolume<system>>>>,
+                       dg::Events::ObserveTimeStepVolume<volume_dim>>>>,
         tmpl::pair<MathFunction<1, Frame::Inertial>,
                    MathFunctions::all_math_functions<1, Frame::Inertial>>,
         tmpl::pair<PhaseChange,
