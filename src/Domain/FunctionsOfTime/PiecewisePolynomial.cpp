@@ -134,6 +134,7 @@ void PiecewisePolynomial<MaxDeriv>::store_entry(
   }
   deriv_info_at_update_times_.insert(time_of_update, std::move(func_and_derivs),
                                      next_expiration_time);
+  deriv_info_at_update_times_.truncate_to_length(100);
 }
 
 template <size_t MaxDeriv>

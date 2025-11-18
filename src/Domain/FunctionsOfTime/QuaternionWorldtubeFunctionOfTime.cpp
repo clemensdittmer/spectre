@@ -247,6 +247,8 @@ void QuaternionWorldtubeFunctionOfTime<MaxDeriv>::update(
     stored_quaternions_and_times_.insert(
         stored_time_of_update, quaternion_to_integrate, stored_expiration_time);
 
+    stored_quaternions_and_times_.truncate_to_length(100);
+
     update_backlog_.erase(entry);
   }
 }
