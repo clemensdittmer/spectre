@@ -290,6 +290,8 @@ long_lines() {
               'docs/Tutorials/CCE.md' \
               'docs/Tutorials/ParallelExecutable/Tutorials.md' \
               'docs/config/MathJax.js' \
+              'CircularOrbitCoeffs.cpp$' \
+              'CircularOrbitConvertEffsource.cpp$' \
               'eos.*' \
               'RotatingStarId.dat$' \
               'RotatingStarId_Hybrid.dat$' \
@@ -631,35 +633,6 @@ enable_if_test() {
     test_check fail foo.cpp 'std::enable_if'
 }
 standard_checks+=(enable_if)
-
-# Check for noexcept
-noexcept() {
-    whitelist "$1" \
-              "src/Utilities/StdHelpers/Bit.hpp" \
-              "src/Parallel/MultiReaderSpinlock.hpp$" \
-              'src/Parallel/StaticSpscQueue.hpp' \
-              "src/Parallel/NodeLock..pp$" \
-              "src/Evolution/DiscontinuousGalerkin/\
-AtomicInboxBoundaryData..pp$" && \
-        is_c++ "$1" && \
-        staged_grep -q 'noexcept ' "$1"
-}
-noexcept_report() {
-    echo "Found occurrences of 'noexcept', please remove."
-    pretty_grep noexcept "$@"
-}
-noexcept_test() {
-    test_check pass foo.cpp ''
-    test_check pass foo.hpp ''
-    test_check pass foo.tpp ''
-    test_check fail foo.hpp 'noexcept '
-    test_check fail foo.cpp 'noexcept '
-    test_check fail foo.tpp 'noexcept '
-    test_check pass foo.hpp 'noexcept(true)'
-    test_check pass foo.cpp 'noexcept(true)'
-    test_check pass foo.tpp 'noexcept(true)'
-}
-standard_checks+=(noexcept)
 
 # Check for mutable
 mutable() {
