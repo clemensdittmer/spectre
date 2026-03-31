@@ -61,7 +61,7 @@ ZerothOrderPuncture::variables(const tnsr::I<DataVector, 3>& x,
                        ::Tags::deriv<CurvedScalarWave::Tags::Psi,
                                      tmpl::size_t<3>, Frame::Inertial>>>
       puncture(get<0>(centered_coords).size());
-  CurvedScalarWave::Worldtube::puncture_field_0(
+  CurvedScalarWave::Worldtube::puncture_field_kerr_0(
       make_not_null(&puncture), centered_coords, particle_position_,
       particle_velocity_, geodesic_acceleration_, 1., bh_spin_);
   puncture *= particle_charge_;
