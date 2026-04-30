@@ -167,4 +167,17 @@ void acceleration_terms_1(
     double fy, double dt_ft, double dt_fx, double dt_fy, double Du_ft,
     double Du_fx, double Du_fy, double dt_Du_ft, double dt_Du_fx,
     double dt_Du_fy, double bh_mass);
+
+/*!
+ * \brief Outputs the puncture/singular field as a tuple for the purposes of
+ * pythong bindings.
+ */
+std::tuple<Scalar<DataVector>, Scalar<DataVector>,
+           tnsr::i<DataVector, 3, Frame::Inertial>>
+puncture_field(const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
+               const tnsr::I<double, 3>& particle_position,
+               const tnsr::I<double, 3>& particle_velocity,
+               const tnsr::I<double, 3>& particle_acceleration,
+               const double bh_mass, const std::array<double, 3>& spin,
+               const size_t order);
 }  // namespace CurvedScalarWave::Worldtube
