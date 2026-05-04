@@ -219,7 +219,7 @@ struct EvolutionMetavars {
                            volume_dim, Spheres, interpolator_source_vars>,
                        dg::Events::field_observations<
                            volume_dim, observe_fields, non_tensor_compute_tags>,
-                       dg::Events::ObserveTimeStepVolume<volume_dim>>>>,
+                       dg::Events::ObserveTimeStepVolume<system>>>>,
         tmpl::pair<evolution::BoundaryCorrection,
                    CurvedScalarWave::BoundaryCorrections::
                        standard_boundary_corrections<volume_dim>>,
