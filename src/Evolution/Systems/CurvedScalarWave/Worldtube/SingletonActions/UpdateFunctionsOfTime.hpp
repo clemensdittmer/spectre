@@ -132,7 +132,7 @@ struct UpdateQuaternionFunctionsOfTime {
     const double new_expiration_time =
         db::get<::Tags::Next<::Tags::TimeStepId>>(box).substep_time();
 
-    if (Parallel::get<Tags::Verbosity>(cache) >= ::Verbosity::Quiet) {
+    if (Parallel::get<Tags::Verbosity>(cache) > ::Verbosity::Quiet) {
       // Time step and orbital velocity updates
       Parallel::printf(
           "Time: %.16f, TimeStep: %.16f\n", time,
