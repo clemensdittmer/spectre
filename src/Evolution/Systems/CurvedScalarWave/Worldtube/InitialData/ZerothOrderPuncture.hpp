@@ -61,6 +61,8 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
     using type = std::array<double, 3>;
     static constexpr Options::String help = {
         "The value of the black hole dimensionless spin."};
+    static constexpr double lower_bound() { return 0.; }
+    static constexpr double upper_bound() { return 1.; }
   };
 
   using options =
@@ -75,8 +77,7 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
 
   ZerothOrderPuncture(std::array<double, 3> particle_position,
                       std::array<double, 3> particle_velocity,
-                      double particle_charge,
-                      const std::array<double, 3> bh_spin,
+                      const double particle_charge, const double bh_spin,
                       const Options::Context& context = {});
   ZerothOrderPuncture(const ZerothOrderPuncture&) = default;
   ZerothOrderPuncture& operator=(const ZerothOrderPuncture&) = default;
@@ -116,8 +117,7 @@ class ZerothOrderPuncture : public evolution::initial_data::InitialData,
   tnsr::I<double, 3> geodesic_acceleration_{
       std::numeric_limits<double>::signaling_NaN()};
   double particle_charge_{std::numeric_limits<double>::signaling_NaN()};
-  std::array<double, 3> bh_spin_{
-      std::numeric_limits<double>::signaling_NaN()};
+  std::array<double, 3> bh_spin_{std::numeric_limits<double>::signaling_NaN()};
   gr::Solutions::KerrSchild kerr_schild_{};
 
   friend bool operator==(const ZerothOrderPuncture& lhs,

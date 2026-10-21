@@ -16,13 +16,13 @@ InitialData:
     ParticlePosition: [&XCoordWorldtube 10., 0., 0.]
     ParticleVelocity: [0., 0.01, 0.]
     ParticleCharge: &Charge 0.5
-    Spin: &Spin [0., 0., 0.]
+    Spin: &Spin 0.
 
 BackgroundSpacetime:
   KerrSchild:
     Mass: 1.
-    Center: [0., 0., 0.]
     Spin: *Spin
+    Center: [0., 0., 0.]
     Velocity: [0., 0., 0.]
 
 ResourceInfo:
@@ -162,11 +162,11 @@ EventsAndTriggersAtSteps:
 Worldtube:
   ExcisionSphere: ExcisionSphereA
   PunctureField:
-    Schwarzschild:
-      ExpansionOrder: 1
+    Kerr:
+      SpinAlongZAxis: *Spin
+      ExpansionOrder: 0
       BlackHoleMass: 1.0
   Charge: *Charge
-  Spin: *Spin
   SelfForceOptions: None
   WorldtubeRadiusOptions:
     Amplitude: 2.
