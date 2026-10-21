@@ -26,13 +26,13 @@ void puncture_field_kerr_0(
     const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
-    const tnsr::I<double, 3>& particle_acceleration, const double BH_mass,
-    const std::array<double, 3>& BH_spin) {
+    const tnsr::I<double, 3>& particle_acceleration, const double bh_mass,
+    const double bh_spin) {
   const size_t grid_size = get<0>(centered_coords).size();
   result->initialize(grid_size);
 
-  const double M = BH_mass;
-  const double a = BH_spin[2];
+  const double M = bh_mass;
+  const double a = bh_spin;
 
   const double xp = particle_position[0];
   const double yp = particle_position[1];

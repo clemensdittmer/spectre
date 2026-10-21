@@ -89,7 +89,7 @@ class PunctureField {
       static constexpr Options::String help{
           "Puncture field expansion order. Currently order 0 is"
           "implemented."};
-      static size_t upper_bound() { return 1; }
+      static size_t upper_bound() { return 0; }
     };
 
     /*!
@@ -110,6 +110,7 @@ class PunctureField {
       static constexpr Options::String help{
           "The dimensionless z-component of the black-hole spin."};
       static double lower_bound() { return 0.; }
+      static double upper_bound() { return 1.; }
     };
 
     using options = tmpl::list<ExpansionOrder, BlackHoleMass, SpinAlongZAxis>;
@@ -219,8 +220,7 @@ void puncture_field_0(
     const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
-    const tnsr::I<double, 3>& particle_acceleration, double bh_mass,
-    const std::array<double, 3>& spin);
+    const tnsr::I<double, 3>& particle_acceleration, double bh_mass);
 
 /*!
  * \brief Computes the puncture/singular field \f$\Psi^\mathcal{P}\f$ of a
@@ -240,7 +240,7 @@ void puncture_field_kerr_0(
     const tnsr::I<double, 3>& particle_position,
     const tnsr::I<double, 3>& particle_velocity,
     const tnsr::I<double, 3>& particle_acceleration, double bh_mass,
-    const std::array<double, 3>& spin);
+    const double spin);
 
 /*!
  * \brief Computes the puncture/singular field \f$\Psi^\mathcal{P}\f$ of a
@@ -315,16 +315,4 @@ void acceleration_terms_1(
     double Du_fx, double Du_fy, double dt_Du_ft, double dt_Du_fx,
     double dt_Du_fy, double bh_mass);
 
-/*!
- * \brief Outputs the puncture/singular field as a tuple for the purposes of
- * pythong bindings.
- */
-std::tuple<Scalar<DataVector>, Scalar<DataVector>,
-           tnsr::i<DataVector, 3, Frame::Inertial>>
-puncture_field(const tnsr::I<DataVector, 3, Frame::Inertial>& centered_coords,
-               const tnsr::I<double, 3>& particle_position,
-               const tnsr::I<double, 3>& particle_velocity,
-               const tnsr::I<double, 3>& particle_acceleration,
-               const double bh_mass, const std::array<double, 3>& spin,
-               const size_t order);
 }  // namespace CurvedScalarWave::Worldtube

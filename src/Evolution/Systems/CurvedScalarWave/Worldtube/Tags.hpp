@@ -72,9 +72,10 @@ struct Charge {
  * \brief The dimensionless spin vector of the central black hole.
  */
 struct Spin {
-  using type = std::array<double, 3>;
+  using type = double;
   static constexpr Options::String help{
-      "The value of the scalar charge in units of the black hole mass M."};
+      "The spin value of the black hole in units of the black hole's mass M. "
+      "Spin is assumed to be oriented in the z-direction."};
   using group = Worldtube;
 };
 
@@ -298,19 +299,6 @@ struct Charge : db::SimpleTag {
   using option_tags = tmpl::list<OptionTags::Charge>;
   static constexpr bool pass_metavariables = false;
   static double create_from_options(const double charge) { return charge; };
-};
-
-/*!
- * \brief The dimensionless spin vector of the central black hole.
- */
-struct Spin : db::SimpleTag {
-  using type = std::array<double, 3>;
-  using option_tags = tmpl::list<OptionTags::Spin>;
-  static constexpr bool pass_metavariables = false;
-  static std::array<double, 3> create_from_options(
-      const std::array<double, 3> spin) {
-    return spin;
-  };
 };
 
 /*!
@@ -732,6 +720,18 @@ struct ExpansionOrder : db::SimpleTag {
   }
 };
 
+/*!
+ * \brief The dimensionless spin magnitude of the central black hole.
+ */
+struct Spin : db::SimpleTag {
+  using type = double;
+  static constexpr bool pass_metavariables = false;
+  using option_tags = tmpl::list<OptionTags::PunctureField>;
+  static double create_from_options(
+      const CurvedScalarWave::Worldtube::PunctureField& puncture_field) {
+    return puncture_field.spin_along_z_axis();
+  };
+};
 /// @{
 /*!
  * Computes the puncture field on an element face abutting the worldtube

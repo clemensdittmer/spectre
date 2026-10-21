@@ -211,7 +211,7 @@ struct EvolutionMetavars {
                 CurvedScalarWave::BoundaryConditions::Worldtube<volume_dim>>>>,
         tmpl::pair<DenseTrigger, DenseTriggers::standard_dense_triggers>,
         tmpl::pair<DomainCreator<volume_dim>,
-                   tmpl::list<domain::creators::BinaryCompactObject<true>>>,
+                   tmpl::list<domain::creators::BinaryCompactObject>>,
         tmpl::pair<Event,
                    tmpl::flatten<tmpl::list<
                        Events::time_events<system>, Events::Completion,
